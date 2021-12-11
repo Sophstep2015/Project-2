@@ -37,24 +37,24 @@ print(vaccinated_rate)
 print(len(df))
 # plt.bar(death_rate, vaccinated_rate)
 # plt.show()
-dr_monthly = []
-vr_monthly = []
+dr_weekly = []
+vr_weekly = []
 for x in range(0, 273, 7):
     dr = death_rate[x]
     vr = vaccinated_rate[x]
     for y in range(1, 7):
         dr += death_rate[x+y]
         vr += vaccinated_rate[x+y]
-    dr_monthly.append(dr/7)
-    vr_monthly.append(vr/7/100)
-print(dr_monthly)
-print(vr_monthly)
+    dr_weekly.append(dr / 7)
+    vr_weekly.append(vr / 7 / 100)
+print(dr_weekly)
+print(vr_weekly)
 plt.plot(
-    np.arange((len(vr_monthly))),
-    vr_monthly
+    np.arange((len(vr_weekly))),
+    vr_weekly
 )
 plt.plot(
-    np.arange(len(dr_monthly)),
-    dr_monthly
+    np.arange(len(dr_weekly)),
+    dr_weekly
 )
 plt.show()
