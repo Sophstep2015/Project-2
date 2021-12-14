@@ -19,24 +19,15 @@ for x in os.listdir("this_one"):
 for x in db.list_collection_names():
     df = pd.DataFrame(list(db[x].find()))
     del df['_id']
-# print(db.list_collection_names())
-# data = list(db["texas_combined_completed_data"].find())
-# print(json.dumps(data, default=str, indent=4))
 df = pd.DataFrame(list(db["texas_combined_completed_data"].find()))
 del df['_id']
 
-print(df.columns)
 death_rate = []
 vaccinated_rate = []
 for x in range(len(df["Deaths"]) - 1):
     death_rate.append(float(df["Deaths"].tolist()[x + 1] - df["Deaths"].tolist()[x]))
     vaccinated_rate.append(df["People_Fully_Vaccinated"].tolist()[x + 1] - df["People_Fully_Vaccinated"].tolist()[x])
-print(death_rate)
-print(vaccinated_rate)
 
-print(len(df))
-# plt.bar(death_rate, vaccinated_rate)
-# plt.show()
 dr_weekly = []
 vr_weekly = []
 for x in range(0, 273, 7):
@@ -47,8 +38,7 @@ for x in range(0, 273, 7):
         vr += vaccinated_rate[x+y]
     dr_weekly.append(dr / 7)
     vr_weekly.append(vr / 7 / 100)
-print(dr_weekly)
-print(vr_weekly)
+
 plt.plot(
     np.arange((len(vr_weekly))),
     vr_weekly
